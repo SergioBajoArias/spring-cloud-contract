@@ -1,4 +1,4 @@
-package com.xeridia.model.contract;
+package com.xeridia.contract;
 
 import com.xeridia.model.Hat;
 import com.xeridia.controller.HatController;
