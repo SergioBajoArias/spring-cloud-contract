@@ -1,7 +1,7 @@
-package com.xeridia.model.controller;
+package com.xeridia.controller;
 
 import com.xeridia.model.Hat;
-import com.xeridia.model.service.HatService;
+import com.xeridia.service.HatService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

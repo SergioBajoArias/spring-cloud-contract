@@ -62,6 +62,23 @@
                 <artifactId>spring-cloud-contract-verifier</artifactId>
                 <version>${spring-cloud-contract.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-contract-wiremock</artifactId>
+                <version>${spring-cloud-contract.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-contract-stub-runner</artifactId>
+                <version>${spring-cloud-contract.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-test</artifactId>
+                <version>${reactor-test.version}</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 
@@ -75,6 +92,7 @@
         <spring-cloud-contract.version>4.1.0</spring-cloud-contract.version>
         <rest-assured.version>5.4.0</rest-assured.version>
         <spring-openfeign.version>4.1.0</spring-openfeign.version>
+        <reactor-test.version>3.6.2</reactor-test.version>
     </properties>
 
 </project>

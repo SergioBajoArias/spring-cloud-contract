@@ -1,6 +1,5 @@
 package com.xeridia.service;
 
-import com.xeridia.model.Hat;
 import com.xeridia.model.Person;
 import com.xeridia.restclient.HatClient;
 import org.springframework.stereotype.Service;

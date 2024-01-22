@@ -1,4 +1,4 @@
-package com.xeridia.model.service;
+package com.xeridia.service;
 
 import com.xeridia.model.Hat;
 import org.springframework.stereotype.Service;
@@ -12,8 +12,8 @@ public class HatService {
 
     public HatService() {
         hatMap = new HashMap<>();
-        hatMap.put(1L, new Hat(1L, "Sombrero", 30L, "red"));
-        hatMap.put(2L, new Hat(2L, "Beanie", 5L, "blue"));
+        hatMap.put(1L, new Hat(1L, "Sombrero", 30, "red"));
+        hatMap.put(2L, new Hat(2L, "Beanie", 5, "blue"));
     }
     public Hat findHatById(Long id) {
         return hatMap.get(id);

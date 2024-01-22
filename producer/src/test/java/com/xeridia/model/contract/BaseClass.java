@@ -1,8 +1,8 @@
 package com.xeridia.model.contract;
 
-import com.xeridia.model.controller.HatController;
-import com.xeridia.model.model.Hat;
-import com.xeridia.model.service.HatService;
+import com.xeridia.model.Hat;
+import com.xeridia.controller.HatController;
+import com.xeridia.service.HatService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
@@ -23,8 +23,8 @@ public abstract class BaseClass {
     public void setup() {
         RestAssuredMockMvc.standaloneSetup(hatController);
         Mockito.when(hatService.findHatById(1L))
-                .thenReturn(new Hat(1L, "Test Hat 1", 10L, "striped"));
+                .thenReturn(new Hat(1L, "Test Hat 1", 10, "striped"));
         Mockito.when(hatService.findHatById(2L))
-                .thenReturn(new Hat(2L, "Test Hat 2", 7L, "green"));
+                .thenReturn(new Hat(2L, "Test Hat 2", 7, "green"));
     }
 }
