@@ -33,15 +33,15 @@ public class PersonIntegrationTest {
 
     private static Stream<Arguments> findByIdParameters() {
         return Stream.of(
-                Arguments.of(1L, new Person(1L, "Sergio", 18, new Hat(1L, "Test Hat 1", 10, "striped"))),
-                Arguments.of(2L, new Person(2L, "Bablo", 15, new Hat(2L, "Test Hat 2", 7, "green")))
+                Arguments.of(1L, new Person(1L, "Tom", 18, new Hat(1L, "Test Hat 1", 10, "striped"))),
+                Arguments.of(2L, new Person(2L, "Jerry", 15, new Hat(2L, "Test Hat 2", 7, "green")))
         );
     }
 
     @ParameterizedTest
     @MethodSource("findByIdParameters")
     public void findById(Long personId, Person expectedPerson) throws Exception {
-        MvcResult mvcResult = mockMvc.perform(get("/person/{id}", personId)
+        MvcResult mvcResult = mockMvc.perform(get("/people/{id}", personId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();

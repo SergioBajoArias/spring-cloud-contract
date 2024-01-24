@@ -18,20 +18,8 @@ public abstract class BaseClass {
     @Autowired
     HatController hatController;
 
-    @MockBean
-    HatService hatService;
-
     @BeforeEach
     public void setup() {
         RestAssuredMockMvc.standaloneSetup(hatController);
-
-        Map<Long, Hat> hats = Map.of(
-                1L, new Hat(1L, "Test Hat 1", 10, "striped"),
-                2L, new Hat(2L, "Test Hat 2", 7, "green")
-        );
-
-        Mockito.when(hatService.findAll()).thenReturn(hats.values());
-        Mockito.when(hatService.findHatById(1L)).thenReturn(hats.get(1L));
-        Mockito.when(hatService.findHatById(2L)).thenReturn(hats.get(2L));
     }
 }

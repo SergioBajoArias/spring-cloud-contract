@@ -14,17 +14,23 @@
     <dependencies>
         <dependency>
             <groupId>com.xeridia</groupId>
-            <artifactId>producer</artifactId>
-            <version>${project.version}</version>
-            <classifier>stubs</classifier>
+            <artifactId>model</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.xeridia</groupId>
-            <artifactId>model</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.xeridia</groupId>
             <artifactId>rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xeridia</groupId>
+            <artifactId>producer</artifactId>
+            <version>${project.version}</version>
+            <classifier>stubs</classifier>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
