@@ -5,10 +5,14 @@ import com.xeridia.service.HatService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collection;
+
 @RestController
+@RequestMapping("/hats")
 public class HatController {
     private final HatService hatService;
 
@@ -16,7 +20,7 @@ public class HatController {
         this.hatService = hatService;
     }
 
-    @GetMapping("hat/{id}")
+    @GetMapping("{id}")
     public Hat findHatById(@PathVariable("id") Long id) {
         Hat hat = hatService.findHatById(id);
         if (hat == null) {
@@ -25,5 +29,10 @@ public class HatController {
             );
         }
         return hat;
+    }
+
+    @GetMapping
+    public Collection<Hat> findAll() {
+        return hatService.findAll();
     }
 }

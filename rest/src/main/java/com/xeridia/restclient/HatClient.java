@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(value = "hatClient", url = "${services.url.hat}")
 public interface HatClient {
-    @GetMapping("/hat/{id}")
+    @GetMapping("/hats/{id}")
     Hat findHatById(@PathVariable("id") Long id);
 }

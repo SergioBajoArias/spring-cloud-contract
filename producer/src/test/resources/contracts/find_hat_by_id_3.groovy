@@ -6,7 +6,7 @@ Contract.make {
     description "should return 404 for hat id=3"
 
     request {
-        url "/hat/3"
+        url "/hats/3"
         method GET()
     }
 

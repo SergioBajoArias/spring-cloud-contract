@@ -6,7 +6,7 @@ Contract.make {
     description "should return hat by id=1"
 
     request {
-        url "/hat/1"
+        url "/hats/1"
         method GET()
     }
 
