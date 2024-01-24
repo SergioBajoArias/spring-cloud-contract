@@ -21,6 +21,7 @@
         <module>consumer</module>
         <module>model</module>
         <module>rest</module>
+        <module>mock-runner</module>
     </modules>
 
     <dependencyManagement>
