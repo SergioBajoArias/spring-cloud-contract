@@ -1,3 +1,16 @@
 package com.xeridia.model;
 
-public record Person(Long id, String name, Integer age, Hat hat) {}
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
+public class Person {
+    private Long id;
+    private String name;
+    private Integer age;
+    private Hat hat;
+}

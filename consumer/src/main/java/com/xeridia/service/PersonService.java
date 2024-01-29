@@ -7,9 +7,8 @@ import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -19,28 +18,38 @@ public class PersonService {
     private final HatClient hatClient;
 
     public PersonService(HatClient hatClient) {
+        this.personMap = new HashMap<>();
         this.hatClient = hatClient;
-
-        this.personMap = Map.of(
-                1L, getPerson(1L, "Tom", 18, 1L),
-                2L, getPerson(2L, "Jerry", 15, 2L)
-        );
     }
-    public Person findPersonById(Long id) {
-        return personMap.get(id);
+    public Optional<Person> findPersonById(Long id) {
+        if(personMap.containsKey(id)) {
+            return Optional.of(setHatDetails(personMap.get(id)));
+        } else {
+            return Optional.empty();
+        }
     }
 
     public Collection<Person> findAll() {
-        return personMap.values();
+        return personMap.values().stream().map(this::setHatDetails).collect(Collectors.toList());
     }
 
-    private Person getPerson(Long id, String name, int age, Long hatId) {
-        Hat hat = new Hat(hatId, null, 0, null);
+    public Person addPerson(Person person) {
+        personMap.put(person.getId(), person);
+        return person;
+    }
+
+    private Person setHatDetails(Person person) {
+        person.setHat(getHatDetails(person.getHat().id()));
+        return person;
+    }
+
+    private Hat getHatDetails(Long hatId) {
         try {
-            hat = hatClient.findHatById(hat.id());
+            return hatClient.findHatById(hatId);
         } catch (FeignException e) {
             log.error("Error while retrieving hat information", e);
+            return new Hat(hatId, null, 0, null);
         }
-        return new Person(id, name, age, hat);
+
     }
 }
