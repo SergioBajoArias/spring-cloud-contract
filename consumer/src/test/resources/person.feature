@@ -1,9 +1,9 @@
 Feature: people endpoints
 
   Scenario Outline: get people details
-    # Given I have 42 cukes in my belly
     When Client requests person <personId> details
     Then Client gets a person with identifier <personId>, name '<personName>', age <personAge> and hat with identifier <hatId>, name '<hatName>', size <hatSize> and color '<hatColor>'
+
     Examples:
     | personId  | personName  | personAge | hatId | hatName     | hatSize | hatColor  |
     | 1         | Tom         | 18        | 1     | Test Hat 1  | 10      | striped   |

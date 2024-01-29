@@ -32,21 +32,22 @@ public class PersonCucumberTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private MvcResult mvcResult;
+    private Person persistedPerson;
 
     @When("Client requests person {long} details")
     public void the_client_requests_person_ID_details(long personId) throws Exception {
-        mvcResult = mockMvc.perform(get("/people/{id}", personId)
+        MvcResult mvcResult = mockMvc.perform(get("/people/{id}", personId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
+
+        persistedPerson = new ObjectMapper().readValue(mvcResult.getResponse().getContentAsString(), Person.class);
     }
 
     @When("Client gets a person with identifier {long}, name {string}, age {int} and hat with identifier {long}, name {string}, size {int} and color {string}")
-    public void the_client_requests_person_ID_details(long personId, String name, int age, long hatId, String hatName, int hatSize, String hatColor) throws Throwable{
+    public void the_client_requests_person_ID_details(long personId, String name, int age, long hatId, String hatName, int hatSize, String hatColor) {
         Person expectedPerson = new Person(personId, name, age, new Hat(hatId, hatName, hatSize, hatColor));
-        Person person = new ObjectMapper().readValue(mvcResult.getResponse().getContentAsString(), Person.class);
-        Assertions.assertEquals(expectedPerson, person);
+        Assertions.assertEquals(expectedPerson, persistedPerson);
     }
 
 }
