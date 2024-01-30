@@ -1,6 +1,10 @@
 Feature: people endpoints
 
   Scenario Outline: get people details
+    Given Following people are persisted
+      | personId | personName | personAge | hatId |
+      | 1        | Tom        | 18        | 1     |
+      | 2        | Jerry      | 15        | 2     |
     When Client requests person <personId> details
     Then Client gets a person with identifier <personId>, name '<personName>', age <personAge> and hat with identifier <hatId>, name '<hatName>', size <hatSize> and color '<hatColor>'
 
@@ -10,13 +14,13 @@ Feature: people endpoints
     | 2         | Jerry       | 15        | 2     | Test Hat 2  | 7       | green     |
 
   Scenario: get person 1 details
-    When Person with identifier 1, name 'Tom', age 18 and hat with identifier 1 is persisted
+    Given Person with identifier 1, name 'Tom', age 18 and hat with identifier 1 is persisted
     And Client requests person 1 details
     Then Client gets a 200 http status
     And Client gets a person with identifier 1, name 'Tom', age 18 and hat with identifier 1, name 'Test Hat 1', size 10 and color 'striped'
 
   Scenario: get person 2 details
-    When Person with identifier 2, name 'Jerry', age 15 and hat with identifier 2 is persisted
+    Given Person with identifier 2, name 'Jerry', age 15 and hat with identifier 2 is persisted
     And Client requests person 2 details
     Then Client gets a 200 http status
     And Client gets a person with identifier 2, name 'Jerry', age 15 and hat with identifier 2, name 'Test Hat 2', size 7 and color 'green'

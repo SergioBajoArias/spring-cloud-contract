@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xeridia.model.Hat;
 import com.xeridia.model.Person;
 import com.xeridia.service.PersonService;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.junit.CucumberOptions;
@@ -21,6 +23,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -42,13 +46,26 @@ public class PersonCucumberTest {
 
     private MvcResult mvcResult;
 
-    @When("Person with identifier {long}, name {string}, age {int} and hat with identifier {long} is persisted")
+    @DataTableType
+    public Person personRow(Map<String, String> row) {
+        Hat hat = new Hat(Long.parseLong(row.get("hatId")), null, 0, null);
+        return new Person(Long.parseLong(row.get("personId")), row.get("personName"), Integer.parseInt(row.get("personAge")), hat);
+    }
+
+    @Given("Following people are persisted")
+    public void people_are_persisted(List<Person> people) {
+        for(Person person : people) {
+            personService.addPerson(person);
+        }
+    }
+
+    @Given("Person with identifier {long}, name {string}, age {int} and hat with identifier {long} is persisted")
     public void person_is_persisted(long personId, String name, int age, long hatId) {
         Person toPersistPerson = new Person(personId, name, age, new Hat(hatId, null, 0, null));
         personService.addPerson(toPersistPerson);
     }
 
-    @And("Client requests person {long} details")
+    @When("Client requests person {long} details")
     public void the_client_requests_person_ID_details(long personId) throws Exception {
         mvcResult = mockMvc.perform(get("/people/{id}", personId)
                         .contentType(MediaType.APPLICATION_JSON))
